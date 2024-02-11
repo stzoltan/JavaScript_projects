@@ -51,3 +51,8 @@ text-align: center;
 #control button {
   width: 45%;
 }
+
+table img {
+  width: 100px;
+  height: 80px;
+}

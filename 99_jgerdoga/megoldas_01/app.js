@@ -8,13 +8,13 @@ function ujratolt() {
 
 // A szerver tartalmat kilistazo fuggveny -----
 document.getElementsByClassName('btn btn-primary')[0].onclick = function () {
-  let katArray = [];
+  let katsArray = [];
   let estArray = [];
   fetch(katUrl)
     .then(res => res.json())
     .then(resJs => {
-      katArray = (Object.entries(resJs))
-      console.log(katArray)
+      katsArray = (Object.entries(resJs))
+      console.log(katsArray)
     })
     
 
@@ -30,7 +30,7 @@ document.getElementsByClassName('btn btn-primary')[0].onclick = function () {
         <table class="table table-success table-striped">
           <thead>
             <tr>
-              <th scope="col">Kategória Id</th>
+              <th scope="col">Kategória</th>
               <th scope="col">Leírás</th>
               <th scope="col">Hírdetés dátuma</th>
               <th scope="col">Kép</th>
@@ -40,19 +40,17 @@ document.getElementsByClassName('btn btn-primary')[0].onclick = function () {
       `;
 
       // html table sorai for ciklussal -----
-      estArray.forEach(element => {
-        let kat = katArray.filter(function (elem) {
-          return elem[0] == element[1].kategoriaid
-        });
-        let katMegnevez = kat[0][1].megnevezes
+      estArray.forEach(est => {
+        let katArray = katsArray.filter(kat => kat[0] == est[1].kategoriaid);
+        let katMegnevez = katArray[0][1].megnevezes
         console.log(katMegnevez);
 
         tableHtml += `
         <tr>
         <td> ${katMegnevez} </td>
-        <td> ${element[1].leiras} </td>
-        <td> ${element[1].hirdetesDatuma} </td>
-        <td> ${element[1].kepUrl} </td>
+        <td> ${est[1].leiras} </td>
+        <td> ${est[1].hirdetesDatuma} </td>
+        <td><img src=${est[1].kepUrl} alt="kepUrl"></td>
         </tr>
       `
       });
